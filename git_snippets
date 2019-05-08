@@ -1,0 +1,9 @@
+#!/bin/python3
+import git
+
+def git_commit():
+    repo = git.Repo("./test-repo")
+    try:
+        commit_result = repo.git.commit(m="Commiting via python code")
+    except git.exc.GitCommandError:
+        print("Possible Nothing To Commit")
