@@ -1,4 +1,6 @@
 #!/bin/python3
+#Helpful URL: https://stackoverflow.com/questions/1456269/python-git-module-experiences
+
 import git
 
 def git_commit():
