@@ -9,3 +9,40 @@ def git_commit():
         commit_result = repo.git.commit(m="Commiting via python code")
     except git.exc.GitCommandError:
         print("Possible Nothing To Commit")
+
+        def git_commit2(location, message):
+    repo = git.Repo(location)
+    return_message = "Possibly Nothing To Commit"
+    try:
+        repo.git.commit('-m', message)
+        return_message = "Successful commit"
+    except git.exc.GitCommandError:
+        return_message = "Possibly Nothing To Commit"
+    return return_message
+
+def git_pull(location):
+    repo = git.Repo(location)
+    try:
+        repo.git.pull()
+        return_message = "Repo has had a fresh pull"
+    except git.exc.GitCommandError:
+        return_message = "Possibly Nothing To Pull"
+    return return_message
+
+def git_add(location):
+    repo = git.Repo(location)
+    try:
+        repo.git.add(".")
+        return_message = "Files have been git added"
+    except git.exc.GitCommandError:
+        return_message = "Most likely nothing to add"
+    return return_message
+
+def git_push(location):
+    repo = git.Repo(location)
+    origin = repo.remote(name='origin')
+    try:
+        result = origin.push()[0].summary
+    except git.exc.GitCommandError as e:
+        result = e.stderr
+    return True, result
