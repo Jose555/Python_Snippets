@@ -46,3 +46,19 @@ def git_push(location):
     except git.exc.GitCommandError as e:
         result = e.stderr
     return True, result
+
+######## SIMPLE GIT
+print repo.git.checkout('master')
+print repo.git.pull(parent_remote_name, 'master')
+print repo.git.checkout(b=issue)
+print repo.git.commit('--allow-empty', m=patch_name) + "\n"
+print repo.git.push('--set-upstream', 'origin', issue)
+
+1. git a check for clone or git pull
+print repo.git.checkout('master')
+print repo.git.pull(parent_remote_name, 'master')
+
+2. after changes, do a check out to a new branch
+print repo.git.checkout(b=inventoryname)
+print repo.git.commit('--allow-empty', m=patch_name) + "\n"
+print repo.git.push('--set-upstream', 'origin', issue)
