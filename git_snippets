@@ -38,6 +38,18 @@ def git_add(location):
         return_message = "Most likely nothing to add"
     return return_message
 
+def git_add_2(location):
+    #https://gitpython.readthedocs.io/en/stable/tutorial.html?highlight=r.index.add
+    result = []
+    repo = git.Repo(location)
+    try:
+        add_result = repo.index.add(["*"])
+        for item in add_result:
+            result.append(item[3])
+        return result
+    except git.exc.GitCommandError as e:
+        return e.stderr
+
 def git_push(location):
     repo = git.Repo(location)
     origin = repo.remote(name='origin')
