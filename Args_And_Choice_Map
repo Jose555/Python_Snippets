@@ -1,0 +1,29 @@
+#!/bin/python3
+import sys
+
+def other():
+    print("Something else")
+
+def what_you_chose():
+    print("Bird Or K9")
+
+def main():
+    data = {}
+    data["Creature"] = sys.argv[1]
+
+    creature_choice_map = {
+            "Bird": what_you_chose,
+            "K9": what_you_chose,
+            "Other": other
+    }
+
+    function_results = {}
+    try:
+        function_results["asset_list"] = creature_choice_map.get(data["Creature"])()
+    except TypeError:
+        print("Current only choices are Bird, K9, Other")
+
+
+
+if __name__ == '__main__':
+    main()
