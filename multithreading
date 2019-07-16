@@ -15,3 +15,41 @@ def run_process(process):
 pool = Pool(processes=3)                                                        
 pool.map(run_process, processes) # run the function with those variables
 pool.map(run_process, other)
+
+#############################################################3333
+
+#!/bin/python3
+import os                                                                       
+import logging
+from multiprocessing import Pool                                                
+
+class ssh_check_threader():                                              
+    def __init__(self):
+        logging.basicConfig(filename='logssh_test.log', level=logging.DEBUG)
+        self.inv = []
+        self.host_status = {}
+        with open('inventory.txt') as inv_file:
+            for host in inv_file:
+                self.inv.append(host.rstrip())
+        inv_file.close()
+
+    def test_ssh(self, host):
+        exit_code = os.system('sshpass -f ~/pass.txt ssh -tt -q {} whoami'.format(host))
+        if exit_code == 0:
+            return host, 'good'
+        else:
+            return host, exit_code
+
+    def run_multi(self):
+        amount_of_inv = len(self.inv)
+        pool = Pool(processes=amount_of_inv)
+        self.host_status = dict(pool.map(self.test_ssh, self.inv))
+
+    def test_local(self):
+        for key, value in self.host_status.items():
+            print("Host: {} , Value: {}".format(key, value))
+
+sct = ssh_check_threader()
+sct.run_multi()
+sct.test_local()
+quit()
