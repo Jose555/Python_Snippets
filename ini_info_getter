@@ -1,0 +1,10 @@
+from ConfigParser import SafeConfigParser
+
+def getter():
+        # import credentials
+        confp = SafeConfigParser()
+        confp.read('self.conf')
+        username = confp.get('auth', 'username').strip()
+        print(username)
+
+getter()
