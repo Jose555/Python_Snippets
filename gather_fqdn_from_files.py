@@ -9,7 +9,8 @@ def host_gather(file_name):
                 host_list.append(line)
     # set removes duplicates
     host_list = set(host_list)
-    print(host_list)
+    for host in host_list:
+        print(host)
 
 def inv_file_getter():
     for arg in sys.argv[1:]:
