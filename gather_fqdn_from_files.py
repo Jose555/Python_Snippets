@@ -2,10 +2,12 @@
 import sys
 
 def host_gather(file_name):
+    host_list = []
     with open(file_name) as inv:
         for line in inv.read().splitlines():
-            if '.<something_common>.' in line:
-                print(line)
+            if '.<something_common>.' in line and '#' not in line:
+                host_list.append(line)
+    print(host_list)
 
 def inv_file_getter():
     for arg in sys.argv[1:]:
